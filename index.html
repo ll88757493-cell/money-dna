@@ -3,25 +3,24 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Money Mirror｜財富DNA測驗</title>
-  <meta name="description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點，完成後獲得專屬財富DNA分析。" />
-  <meta property="og:title" content="Money Mirror｜財富DNA測驗" />
-  <meta property="og:description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點。" />
-  <meta property="og:type" content="website" />
-
+  <meta name="description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點。">
   <style>
     :root{
-      --bg:#070b13;
-      --bg2:#0f1b2d;
+      --bg:#060914;
+      --bg2:#0c1728;
+      --card:rgba(255,255,255,.075);
+      --card2:rgba(255,255,255,.12);
       --line:rgba(255,255,255,.14);
-      --gold:#d8b46a;
-      --gold2:#ffe7a3;
-      --blue:#73d5ff;
       --text:#f8fafc;
       --muted:#aab6ca;
-      --shadow:0 30px 90px rgba(0,0,0,.38);
+      --gold:#d8b46a;
+      --gold2:#ffe7a3;
+      --blue:#79d7ff;
+      --green:#86efac;
+      --red:#fca5a5;
+      --shadow:0 28px 90px rgba(0,0,0,.42);
     }
     *{box-sizing:border-box}
     body{
@@ -30,88 +29,119 @@
       color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
       background:
-        radial-gradient(circle at 12% 8%, rgba(216,180,106,.38), transparent 26%),
-        radial-gradient(circle at 90% 12%, rgba(115,213,255,.22), transparent 30%),
-        radial-gradient(circle at 50% 95%, rgba(216,180,106,.18), transparent 30%),
+        radial-gradient(circle at 10% 8%, rgba(216,180,106,.34), transparent 28%),
+        radial-gradient(circle at 86% 10%, rgba(121,215,255,.21), transparent 30%),
+        radial-gradient(circle at 50% 95%, rgba(216,180,106,.15), transparent 33%),
         linear-gradient(180deg,var(--bg),var(--bg2));
     }
-    .wrap{width:min(980px,100%);margin:0 auto;padding:22px 16px 54px}
-    .nav{display:flex;justify-content:space-between;align-items:center;margin:4px 0 28px}
-    .brand{display:flex;gap:12px;align-items:center}
+    body:before{
+      content:"";
+      position:fixed;inset:0;pointer-events:none;opacity:.25;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+    }
+    .wrap{width:min(1040px,100%);margin:0 auto;padding:22px 16px 54px;position:relative}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:46px;height:46px;border-radius:16px;
-      background:linear-gradient(135deg,var(--gold),#fff1ba);
-      color:#101827;display:grid;place-items:center;font-weight:950;
-      box-shadow:0 12px 36px rgba(216,180,106,.26);
+      width:48px;height:48px;border-radius:17px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--gold),#fff0b7);
+      color:#111827;font-weight:1000;letter-spacing:-1px;
+      box-shadow:0 14px 36px rgba(216,180,106,.28);
     }
     .brand strong{font-size:18px}
     .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
     .card{
       background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.052));
       border:1px solid var(--line);
-      border-radius:32px;
-      padding:32px;
+      border-radius:34px;
+      padding:34px;
       box-shadow:var(--shadow);
       backdrop-filter: blur(16px);
+      animation:fade .32s ease both;
     }
-    .hero{padding:48px 34px 36px}
+    @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .hero{padding:54px 38px 40px;position:relative;overflow:hidden}
+    .hero:after{
+      content:"";position:absolute;right:-100px;top:-130px;width:360px;height:360px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,231,163,.25),transparent 66%);
+    }
     .pill{
-      display:inline-flex;gap:8px;align-items:center;padding:9px 14px;border-radius:999px;
-      border:1px solid rgba(216,180,106,.35);background:rgba(216,180,106,.12);
-      color:var(--gold2);font-size:14px;font-weight:800;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 14px;border-radius:999px;
+      background:rgba(216,180,106,.12);
+      border:1px solid rgba(216,180,106,.35);
+      color:var(--gold2);font-size:14px;font-weight:850;
     }
-    h1{font-size:clamp(38px,6vw,72px);line-height:1.03;margin:18px 0 14px;letter-spacing:-2.5px}
-    h2{font-size:clamp(24px,4vw,36px);line-height:1.25;margin:0 0 18px}
+    h1{font-size:clamp(38px,6.6vw,78px);line-height:1.03;letter-spacing:-2.8px;margin:18px 0 16px}
+    h2{font-size:clamp(24px,4vw,38px);line-height:1.24;letter-spacing:-1px;margin:0 0 18px}
+    h3{font-size:22px;margin:0 0 12px}
     p{color:var(--muted);line-height:1.85;font-size:16px}
-    .lead{font-size:19px;color:#dbe7f6;max-width:720px}
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
-    .benefit{
-      border:1px solid var(--line);background:rgba(255,255,255,.055);
-      border-radius:22px;padding:16px;min-height:112px;
+    .lead{font-size:19px;color:#dce8f8;max-width:740px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+    .feature{
+      background:rgba(255,255,255,.055);border:1px solid var(--line);
+      border-radius:24px;padding:17px;min-height:120px
     }
-    .benefit b{display:block;margin-bottom:8px;color:#fff}
-    .benefit span{font-size:13px;color:var(--muted);line-height:1.55}
-    button{
-      width:100%;border:0;border-radius:20px;padding:17px 20px;font-size:17px;font-weight:950;
+    .feature b{display:block;color:#fff;margin-bottom:8px}
+    .feature span{font-size:13px;color:var(--muted);line-height:1.55}
+    button,.btn{
+      width:100%;border:0;border-radius:21px;padding:17px 20px;
+      font-size:17px;font-weight:950;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      color:#111827;text-decoration:none;
       background:linear-gradient(135deg,var(--gold),var(--gold2));
-      color:#111827;cursor:pointer;margin-top:14px;
-      box-shadow:0 18px 46px rgba(216,180,106,.24);
+      box-shadow:0 18px 48px rgba(216,180,106,.25);
+      transition:.16s;
+      margin-top:14px;
     }
+    button:hover,.btn:hover{transform:translateY(-2px)}
     .secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);box-shadow:none}
     .hidden{display:none!important}
-    .quiz-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px;color:var(--muted)}
+    .quiz-head{display:flex;justify-content:space-between;gap:14px;color:var(--muted);margin-bottom:18px}
     .progress{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin:8px 0 28px}
     .bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--blue));transition:.28s}
     .option{
-      display:flex;gap:12px;align-items:flex-start;padding:16px 17px;margin:12px 0;border-radius:21px;
-      border:1px solid var(--line);background:rgba(255,255,255,.052);cursor:pointer;color:#edf4ff;
+      display:flex;gap:12px;padding:16px 17px;margin:12px 0;border-radius:22px;
+      border:1px solid var(--line);background:rgba(255,255,255,.055);cursor:pointer;color:#edf4ff;
+      transition:.16s;
     }
-    .option input{margin-top:3px;accent-color:var(--gold);transform:scale(1.15)}
-    .option strong{color:var(--gold2);margin-right:5px}
+    .option:hover{background:rgba(255,255,255,.09);border-color:rgba(255,231,163,.55)}
+    .option input{margin-top:3px;accent-color:var(--gold);transform:scale(1.12)}
+    .option strong{color:var(--gold2);margin-right:6px}
     .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    label{display:block;font-weight:850;margin:14px 0 7px;color:#e7edf7}
+    label{display:block;font-weight:850;margin:14px 0 7px;color:#edf4ff}
     input,select,textarea{
       width:100%;padding:16px;border-radius:18px;border:1px solid var(--line);
       background:rgba(255,255,255,.07);color:var(--text);font-size:16px;outline:none;
     }
     select option{color:#111827}
-    textarea{min-height:96px}
+    textarea{min-height:96px;resize:vertical}
     .note{font-size:13px;color:var(--muted)}
-    .result-name{font-size:clamp(34px,5vw,58px);line-height:1.04;margin:10px 0;color:var(--gold2)}
+    .analysis{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch;
+    }
+    .result-name{font-size:clamp(34px,5.2vw,60px);line-height:1.04;margin:10px 0;color:var(--gold2);letter-spacing:-1.8px}
     .result-box{border-left:5px solid var(--gold);background:rgba(255,255,255,.055);border-radius:22px;padding:20px;color:#eaf1fb;line-height:1.9}
-    .score-card{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:26px;padding:20px;margin-top:18px}
-    .big-score{font-size:64px;font-weight:1000;color:#fff;line-height:1}
+    .panel{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:26px;padding:20px}
+    .big-score{font-size:64px;font-weight:1000;line-height:1;margin:8px 0 14px}
     .big-score span{font-size:18px;color:var(--muted)}
     .score-row{margin:14px 0}
     .score-row .top{display:flex;justify-content:space-between;font-size:14px;color:#dce7f5;margin-bottom:7px}
     .mini{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
     .mini span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--blue))}
-    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
-    @media(max-width:760px){
-      .grid{grid-template-columns:1fr}
-      .card{padding:23px;border-radius:26px}
+    .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+    .insight{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:22px;padding:16px}
+    .insight b{display:block;margin-bottom:8px;color:#fff}
+    ul{margin:8px 0 0;padding-left:22px;color:#dce7f5;line-height:1.75}
+    .gift{margin-top:18px;border:1px solid rgba(216,180,106,.28);background:rgba(216,180,106,.08);border-radius:26px;padding:20px}
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
+    @media(max-width:820px){
+      .grid4,.analysis,.insights{grid-template-columns:1fr}
+      .card{padding:23px;border-radius:27px}
       .hero{padding:32px 23px}
       .actions{grid-template-columns:1fr}
+      .nav{margin-bottom:18px}
     }
   </style>
 </head>
@@ -120,26 +150,33 @@
   <nav class="nav">
     <div class="brand">
       <div class="logo">MM</div>
-      <div><strong>Money Mirror</strong><small>看見你的財富人生</small></div>
+      <div><strong>Money Mirror</strong><small>財富覺察系統</small></div>
     </div>
+    <span class="note">施茗凱 財務顧問</span>
   </nav>
 
   <main id="start" class="card hero">
-    <span class="pill">活動專屬｜3分鐘完成</span>
-    <h1>看見你的<br>財富DNA</h1>
-    <p class="lead">每個人的人生，都有一套看不見的金錢模式。它影響你的收入、投資、保險、房貸，甚至退休選擇。今天，讓我們一起看見它。</p>
-    <div class="grid">
-      <div class="benefit"><b>🧬 財富人格</b><span>了解你的金錢決策模式。</span></div>
-      <div class="benefit"><b>📊 健康指數</b><span>看見現金流與規劃成熟度。</span></div>
-      <div class="benefit"><b>🛡 風險覺察</b><span>檢視保單、負債與風險盲點。</span></div>
-      <div class="benefit"><b>🎁 免費會談</b><span>完成測驗可預約60分鐘財富導航會談。</span></div>
+    <span class="pill">Money Mirror 3.0 Beta｜活動專屬</span>
+    <h1>看見你的<br>財富人生</h1>
+    <p class="lead">
+      真正限制財富的，從來不只是收入，而是我們每天重複做出的財務決策。
+      透過 3 分鐘測驗，看見你的金錢模式、財務優勢與可能盲點。
+    </p>
+    <div class="grid4">
+      <div class="feature"><b>🧬 財富DNA</b><span>看見你面對金錢、風險與選擇時的慣性。</span></div>
+      <div class="feature"><b>📊 財商成熟度</b><span>以測驗結果估算財務決策成熟度。</span></div>
+      <div class="feature"><b>🔎 財務盲點</b><span>整理現金流、保障與規劃上可能忽略之處。</span></div>
+      <div class="feature"><b>🎁 財富導航</b><span>完成後可銜接 60 分鐘財務健康檢查。</span></div>
     </div>
     <button onclick="startQuiz()">開始測驗 →</button>
-    <p class="note">本測驗用於財商覺察與活動引導，不構成投資、保險或稅務建議。</p>
+    <p class="note">本測驗為財商覺察工具，不構成投資、保險、貸款或稅務建議。</p>
   </main>
 
   <section id="quiz" class="card hidden">
-    <div class="quiz-head"><strong id="counter"></strong><span id="category"></span></div>
+    <div class="quiz-head">
+      <strong id="counter"></strong>
+      <span id="category"></span>
+    </div>
     <div class="progress"><div id="bar" class="bar"></div></div>
     <h2 id="questionTitle"></h2>
     <div id="options"></div>
@@ -151,41 +188,68 @@
 
   <section id="leadForm" class="card hidden">
     <span class="pill">測驗完成｜查看結果前最後一步</span>
-    <h2>留下資料，取得你的專屬財富DNA分析</h2>
-    <label>姓名 *</label><input id="name" placeholder="請輸入姓名" />
-    <label>LINE ID *</label><input id="line" placeholder="請輸入 LINE ID" />
-    <label>電話</label><input id="phone" placeholder="選填" />
+    <h2>留下姓名，取得你的專屬財富DNA分析</h2>
+    <p>以下資料只作為活動現場辨識與後續財務覺察引導使用。</p>
+
+    <label>姓名 *</label>
+    <input id="name" placeholder="請輸入姓名">
+
     <label>目前最想改善的財務問題</label>
     <select id="focus">
-      <option>財務沒有方向</option><option>存不到錢</option><option>不知道怎麼投資</option>
-      <option>保單不知道夠不夠</option><option>房貸/負債壓力</option><option>退休規劃</option><option>資產配置</option>
+      <option>財務沒有方向</option>
+      <option>存不到錢</option>
+      <option>不知道怎麼投資</option>
+      <option>保單不知道夠不夠</option>
+      <option>房貸／負債壓力</option>
+      <option>退休規劃</option>
+      <option>資產配置</option>
+      <option>家庭資產傳承</option>
     </select>
+
     <label>希望一小時會談協助你看什麼？</label>
     <textarea id="wish" placeholder="例如：現金流、保單、房貸、退休、投資方向..."></textarea>
+
     <button onclick="showResult()">查看我的財富DNA</button>
   </section>
 
   <section id="result" class="card hidden">
-    <span class="pill">你的財富DNA結果</span>
-    <div id="resultTitle" class="result-name"></div>
-    <p id="resultSub"></p>
-    <div id="resultContent" class="result-box"></div>
-    <div class="score-card">
-      <div class="note">財商成熟度</div>
-      <div class="big-score"><span id="maturityScore">0</span><span>/100</span></div>
-      <div id="scoreBlock"></div>
+    <div class="analysis">
+      <div>
+        <span class="pill">你的財富DNA結果</span>
+        <div id="resultTitle" class="result-name"></div>
+        <p id="resultSub"></p>
+        <div id="resultContent" class="result-box"></div>
+      </div>
+
+      <div class="panel">
+        <div class="note">財商成熟度</div>
+        <div class="big-score"><span id="maturityScore">0</span><span>/100</span></div>
+        <div id="scoreBlock"></div>
+      </div>
     </div>
-    <button onclick="bookConsult()">加入 LINE｜預約免費60分鐘財富導航會談</button>
-    <button class="secondary" onclick="downloadReport()">下載我的財富報告</button>
+
+    <div class="insights">
+      <div class="insight"><b>你的優勢</b><ul id="strengthList"></ul></div>
+      <div class="insight"><b>容易忽略</b><ul id="blindList"></ul></div>
+      <div class="insight"><b>建議下一步</b><ul id="nextList"></ul></div>
+    </div>
+
+    <div class="gift">
+      <h3>🎁 專屬活動禮：60分鐘財富導航會談</h3>
+      <p>若你想更深入了解自己的結果，可預約一對一會談。內容可包含：財富DNA解析、財務健康檢查、保單健診、房貸健診、退休方向與財務藍圖建議。</p>
+      <button onclick="bookConsult()">我要預約／加入 LINE</button>
+      <button class="secondary" onclick="downloadReport()">下載我的財富報告</button>
+    </div>
+
     <button class="secondary" onclick="restart()">重新測驗</button>
-    <p class="note">提醒：正式規劃仍需依你的收入、支出、資產、負債、保單與家庭狀況完整評估。</p>
   </section>
 
-  <div class="footer">Money Mirror｜財富覺察體驗｜施茗凱 財務顧問</div>
+  <div class="footer">Money Mirror｜看見你的財富人生</div>
 </div>
 
 <script>
-const LINE_URL = "https://line.me/R/ti/p/@你的LINE官方帳號";
+const LINE_URL = "https://line.me/R/ti/p/@你的LINE官方帳號"; 
+// 請把上面改成你的 LINE 官方帳號連結
 
 const questions = [
   {cat:"財富性格",q:"如果今天突然收到 100 萬元，你第一個想法是？",o:[["存起來，留著未來用","A"],["投資，讓它繼續增值","B"],["完成一直想做的夢想或旅行","C"],["先規劃，再決定怎麼分配","D"]]},
@@ -207,15 +271,46 @@ const questions = [
 ];
 
 const resultMap = {
-  A:{t:"安全守成型",sub:"你的金錢核心是安全感。",c:"你重視穩定、預備金與風險控管。優勢是不容易衝動，也比較能守住財務底線。盲點是可能因為太保守，而錯過資產成長、現金流提升與長期配置的機會。"},
-  B:{t:"成長投資型",sub:"你的金錢核心是資產成長。",c:"你相信錢要替自己工作，願意學習投資，也願意承擔合理風險。優勢是有資產成長意識，容易累積投資經驗。盲點是可能過度追求報酬，忽略保單、負債、現金流與家庭責任。"},
-  C:{t:"生活體驗型",sub:"你的金錢核心是生活品質。",c:"你重視當下感受，認為財富應該服務人生。優勢是幸福感高，懂得享受成果。盲點是容易忽略儲蓄率、投資計畫、保障缺口與長期財務目標。"},
-  D:{t:"策略自由型",sub:"你的金錢核心是人生選擇權。",c:"你重視人生藍圖與長期規劃，傾向從整體角度看待財務。優勢是目標感強，也願意為未來做準備。盲點是可能想得太完整，反而行動速度變慢。"}
+  A:{
+    t:"安全守成型", sub:"你的金錢核心是安全感。",
+    c:"你重視穩定、預備金與風險控管。你不容易衝動，也比較能守住財務底線。需要注意的是，若長期只追求安全，可能錯過資產成長與現金流提升的機會。",
+    s:["重視穩定","風險意識高","不容易衝動消費或投資"],
+    b:["可能過度保守","資產成長速度偏慢","容易把保單或存款當成全部規劃"],
+    n:["建立緊急預備金後，開始做資產配置","檢查保障是否符合家庭責任","設定一個明確的中長期財務目標"]
+  },
+  B:{
+    t:"成長投資型", sub:"你的金錢核心是資產成長。",
+    c:"你相信錢要替自己工作，願意學習投資，也願意承擔合理風險。你的資產成長意識強，但要避免過度追求報酬，而忽略現金流、防護網與負債控管。",
+    s:["願意學習","有資產成長意識","能接受合理風險"],
+    b:["可能忽略保障缺口","容易追求高報酬","投資前未必先看整體現金流"],
+    n:["建立投資紀律","同步檢視保單與負債","把報酬目標改成長期可持續策略"]
+  },
+  C:{
+    t:"生活體驗型", sub:"你的金錢核心是生活品質。",
+    c:"你認為財富應該服務人生，懂得享受成果，也重視當下感受。你的幸福感通常不低，但要留意儲蓄率、退休準備與風險規劃，不要讓未來的自己承擔壓力。",
+    s:["懂得享受人生","重視生活品質","不容易只為錢而活"],
+    b:["儲蓄率可能不足","長期目標容易延後","容易低估退休與醫療風險"],
+    n:["建立固定儲蓄比例","把享受預算制度化","檢查保障與退休準備是否足夠"]
+  },
+  D:{
+    t:"策略自由型", sub:"你的金錢核心是人生選擇權。",
+    c:"你重視人生藍圖與長期規劃，傾向從整體角度看待財務。你的目標感強，也願意為未來做準備。需要注意的是，若想得太完整，可能會延遲真正行動。",
+    s:["目標感明確","擅長長期規劃","重視人生選擇權"],
+    b:["可能想太多而行動慢","容易忽略短期現金流","規劃很多但缺少定期追蹤"],
+    n:["把大目標拆成年度行動","定期檢視現金流、保單、房貸與投資","建立個人財務藍圖"]
+  }
 };
 
-let current=0, answers=Array(questions.length).fill(null), scores={A:0,B:0,C:0,D:0}, lastLead=null;
+let current=0;
+let answers=Array(questions.length).fill(null);
+let scores={A:0,B:0,C:0,D:0};
+let lastLead=null;
 
-function show(id){["start","quiz","leadForm","result"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function show(id){
+  ["start","quiz","leadForm","result"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 function startQuiz(){show("quiz");render();}
 function render(){
   const item=questions[current];
@@ -223,34 +318,100 @@ function render(){
   document.getElementById("category").innerText=item.cat;
   document.getElementById("bar").style.width=`${(current/questions.length)*100}%`;
   document.getElementById("questionTitle").innerText=item.q;
-  document.getElementById("options").innerHTML=item.o.map((x,i)=>`<label class="option"><input type="radio" name="ans" value="${x[1]}" ${answers[current]===x[1]?"checked":""}><div><strong>${String.fromCharCode(65+i)}</strong>${x[0]}</div></label>`).join("");
+  document.getElementById("options").innerHTML=item.o.map((x,i)=>`
+    <label class="option">
+      <input type="radio" name="ans" value="${x[1]}" ${answers[current]===x[1]?"checked":""}>
+      <div><strong>${String.fromCharCode(65+i)}</strong>${x[0]}</div>
+    </label>`).join("");
 }
-function nextQuestion(){const selected=document.querySelector('input[name="ans"]:checked');if(!selected){alert("請先選擇一個答案");return;}answers[current]=selected.value;current++;if(current<questions.length){render();}else{show("leadForm");}}
+function nextQuestion(){
+  const selected=document.querySelector('input[name="ans"]:checked');
+  if(!selected){alert("請先選擇一個答案");return;}
+  answers[current]=selected.value;
+  current++;
+  if(current<questions.length){render();}else{show("leadForm");}
+}
 function prevQuestion(){if(current>0){current--;render();}}
-function calc(){scores={A:0,B:0,C:0,D:0};answers.forEach(a=>{if(a)scores[a]++;});let top="A";Object.keys(scores).forEach(k=>{if(scores[k]>scores[top])top=k;});return top;}
-function maturity(){return Math.round((scores.A*72 + scores.B*82 + scores.C*70 + scores.D*88) / questions.length);}
+function calc(){
+  scores={A:0,B:0,C:0,D:0};
+  answers.forEach(a=>{if(a)scores[a]++;});
+  let top="A";
+  Object.keys(scores).forEach(k=>{if(scores[k]>scores[top]) top=k;});
+  return top;
+}
+function maturity(){
+  return Math.round((scores.A*72 + scores.B*82 + scores.C*70 + scores.D*88) / questions.length);
+}
+function listHTML(arr){return arr.map(x=>`<li>${x}</li>`).join("");}
 function showResult(){
-  const name=document.getElementById("name").value.trim(), line=document.getElementById("line").value.trim();
-  if(!name || !line){alert("請填寫姓名與 LINE ID");return;}
-  const top=calc(), res=resultMap[top], m=maturity();
+  const name=document.getElementById("name").value.trim();
+  if(!name){alert("請填寫姓名");return;}
+  const top=calc();
+  const res=resultMap[top];
+  const m=maturity();
+
   document.getElementById("resultTitle").innerText=res.t;
   document.getElementById("resultSub").innerText=res.sub;
   document.getElementById("resultContent").innerText=res.c;
   document.getElementById("maturityScore").innerText=m;
+  document.getElementById("strengthList").innerHTML=listHTML(res.s);
+  document.getElementById("blindList").innerHTML=listHTML(res.b);
+  document.getElementById("nextList").innerHTML=listHTML(res.n);
+
   const total=questions.length;
-  document.getElementById("scoreBlock").innerHTML=Object.keys(scores).map(k=>`<div class="score-row"><div class="top"><span>${resultMap[k].t}</span><b>${scores[k]}</b></div><div class="mini"><span style="width:${scores[k]/total*100}%"></span></div></div>`).join("");
-  lastLead={name,line,phone:document.getElementById("phone").value.trim(),focus:document.getElementById("focus").value,wish:document.getElementById("wish").value.trim(),result:res.t,maturity:m,scores:{...scores},time:new Date().toLocaleString()};
+  document.getElementById("scoreBlock").innerHTML=Object.keys(scores).map(k=>`
+    <div class="score-row">
+      <div class="top"><span>${resultMap[k].t}</span><b>${scores[k]}</b></div>
+      <div class="mini"><span style="width:${scores[k]/total*100}%"></span></div>
+    </div>`).join("");
+
+  lastLead={
+    name,
+    focus:document.getElementById("focus").value,
+    wish:document.getElementById("wish").value.trim(),
+    result:res.t,
+    maturity:m,
+    scores:{...scores},
+    time:new Date().toLocaleString()
+  };
   localStorage.setItem("moneyMirrorLead", JSON.stringify(lastLead));
+  console.log("Money Mirror Lead", lastLead);
   show("result");
 }
-function bookConsult(){if(LINE_URL.includes("你的LINE官方帳號")){alert("請把程式碼中的 LINE_URL 改成你的 LINE 官方帳號連結。");return;}window.open(LINE_URL,"_blank");}
+function bookConsult(){
+  if(LINE_URL.includes("你的LINE官方帳號")){
+    alert("請把程式碼裡的 LINE_URL 改成你的 LINE 官方帳號連結。");
+    return;
+  }
+  window.open(LINE_URL,"_blank");
+}
 function downloadReport(){
   const lead=lastLead || JSON.parse(localStorage.getItem("moneyMirrorLead") || "{}");
-  const text=`Money Mirror｜財富DNA分析報告\n\n姓名：${lead.name||""}\n財富DNA：${lead.result||""}\n財商成熟度：${lead.maturity||""}/100\n目前最想改善：${lead.focus||""}\n希望會談協助：${lead.wish||""}\n\n建議預約 60 分鐘「財富導航會談」，完整整理收入、支出、資產、負債、保單、房貸與退休目標。`;
-  const blob=new Blob([text],{type:"text/plain;charset=utf-8"}), url=URL.createObjectURL(blob), a=document.createElement("a");
-  a.href=url;a.download="Money-Mirror-財富DNA報告.txt";a.click();URL.revokeObjectURL(url);
+  const text=`Money Mirror｜財富DNA分析報告
+
+姓名：${lead.name||""}
+財富DNA：${lead.result||""}
+財商成熟度：${lead.maturity||""}/100
+目前最想改善：${lead.focus||""}
+希望會談協助：${lead.wish||""}
+
+建議：
+預約 60 分鐘「財富導航會談」，完整整理收入、支出、資產、負債、保單、房貸與退休目標。`;
+  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="Money-Mirror-財富DNA報告.txt";
+  a.click();
+  URL.revokeObjectURL(url);
 }
-function restart(){current=0;answers=Array(questions.length).fill(null);scores={A:0,B:0,C:0,D:0};lastLead=null;show("start");}
+function restart(){
+  current=0;
+  answers=Array(questions.length).fill(null);
+  scores={A:0,B:0,C:0,D:0};
+  lastLead=null;
+  show("start");
+}
 </script>
 </body>
 </html>
