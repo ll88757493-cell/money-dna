@@ -1,423 +1,256 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>財富DNA測驗</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Money Mirror｜財富DNA測驗</title>
+  <meta name="description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點，完成後獲得專屬財富DNA分析。" />
+  <meta property="og:title" content="Money Mirror｜財富DNA測驗" />
+  <meta property="og:description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點。" />
+  <meta property="og:type" content="website" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: "Noto Sans TC", Arial, sans-serif;
-      background: #f6f2e9;
-      color: #1f2933;
+    :root{
+      --bg:#070b13;
+      --bg2:#0f1b2d;
+      --line:rgba(255,255,255,.14);
+      --gold:#d8b46a;
+      --gold2:#ffe7a3;
+      --blue:#73d5ff;
+      --text:#f8fafc;
+      --muted:#aab6ca;
+      --shadow:0 30px 90px rgba(0,0,0,.38);
     }
-    .container {
-      max-width: 720px;
-      margin: auto;
-      padding: 24px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(216,180,106,.38), transparent 26%),
+        radial-gradient(circle at 90% 12%, rgba(115,213,255,.22), transparent 30%),
+        radial-gradient(circle at 50% 95%, rgba(216,180,106,.18), transparent 30%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
     }
-    .card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      margin-bottom: 20px;
+    .wrap{width:min(980px,100%);margin:0 auto;padding:22px 16px 54px}
+    .nav{display:flex;justify-content:space-between;align-items:center;margin:4px 0 28px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:46px;height:46px;border-radius:16px;
+      background:linear-gradient(135deg,var(--gold),#fff1ba);
+      color:#101827;display:grid;place-items:center;font-weight:950;
+      box-shadow:0 12px 36px rgba(216,180,106,.26);
     }
-    h1, h2 {
-      margin-top: 0;
+    .brand strong{font-size:18px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.052));
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:32px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(16px);
     }
-    .subtitle {
-      color: #6b7280;
-      line-height: 1.7;
+    .hero{padding:48px 34px 36px}
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;padding:9px 14px;border-radius:999px;
+      border:1px solid rgba(216,180,106,.35);background:rgba(216,180,106,.12);
+      color:var(--gold2);font-size:14px;font-weight:800;
     }
-    button {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 14px;
-      background: #1f2933;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 16px;
+    h1{font-size:clamp(38px,6vw,72px);line-height:1.03;margin:18px 0 14px;letter-spacing:-2.5px}
+    h2{font-size:clamp(24px,4vw,36px);line-height:1.25;margin:0 0 18px}
+    p{color:var(--muted);line-height:1.85;font-size:16px}
+    .lead{font-size:19px;color:#dbe7f6;max-width:720px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+    .benefit{
+      border:1px solid var(--line);background:rgba(255,255,255,.055);
+      border-radius:22px;padding:16px;min-height:112px;
     }
-    button:hover {
-      background: #374151;
+    .benefit b{display:block;margin-bottom:8px;color:#fff}
+    .benefit span{font-size:13px;color:var(--muted);line-height:1.55}
+    button{
+      width:100%;border:0;border-radius:20px;padding:17px 20px;font-size:17px;font-weight:950;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#111827;cursor:pointer;margin-top:14px;
+      box-shadow:0 18px 46px rgba(216,180,106,.24);
     }
-    .option {
-      display: block;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      padding: 14px;
-      margin: 12px 0;
-      cursor: pointer;
-      background: #fafafa;
+    .secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);box-shadow:none}
+    .hidden{display:none!important}
+    .quiz-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px;color:var(--muted)}
+    .progress{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin:8px 0 28px}
+    .bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--blue));transition:.28s}
+    .option{
+      display:flex;gap:12px;align-items:flex-start;padding:16px 17px;margin:12px 0;border-radius:21px;
+      border:1px solid var(--line);background:rgba(255,255,255,.052);cursor:pointer;color:#edf4ff;
     }
-    .option input {
-      margin-right: 8px;
+    .option input{margin-top:3px;accent-color:var(--gold);transform:scale(1.15)}
+    .option strong{color:var(--gold2);margin-right:5px}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-weight:850;margin:14px 0 7px;color:#e7edf7}
+    input,select,textarea{
+      width:100%;padding:16px;border-radius:18px;border:1px solid var(--line);
+      background:rgba(255,255,255,.07);color:var(--text);font-size:16px;outline:none;
     }
-    input[type="text"], input[type="tel"] {
-      width: 100%;
-      padding: 14px;
-      margin: 8px 0 14px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    .hidden {
-      display: none;
-    }
-    .badge {
-      display: inline-block;
-      background: #efe6d6;
-      color: #7c4a03;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-    .result-box {
-      background: #f9fafb;
-      border-left: 5px solid #1f2933;
-      padding: 18px;
-      border-radius: 12px;
-      line-height: 1.8;
+    select option{color:#111827}
+    textarea{min-height:96px}
+    .note{font-size:13px;color:var(--muted)}
+    .result-name{font-size:clamp(34px,5vw,58px);line-height:1.04;margin:10px 0;color:var(--gold2)}
+    .result-box{border-left:5px solid var(--gold);background:rgba(255,255,255,.055);border-radius:22px;padding:20px;color:#eaf1fb;line-height:1.9}
+    .score-card{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:26px;padding:20px;margin-top:18px}
+    .big-score{font-size:64px;font-weight:1000;color:#fff;line-height:1}
+    .big-score span{font-size:18px;color:var(--muted)}
+    .score-row{margin:14px 0}
+    .score-row .top{display:flex;justify-content:space-between;font-size:14px;color:#dce7f5;margin-bottom:7px}
+    .mini{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+    .mini span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--blue))}
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+    @media(max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .card{padding:23px;border-radius:26px}
+      .hero{padding:32px 23px}
+      .actions{grid-template-columns:1fr}
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-
-    <div id="start" class="card">
-      <span class="badge">Money Mirror 財富覺察計畫</span>
-      <h1>財富DNA測驗</h1>
-      <p class="subtitle">
-        這不是考試，也沒有標準答案。<br>
-        透過 16 題問題，幫助你看見自己的金錢模式、財務優勢與可能盲點。
-      </p>
-      <button onclick="startQuiz()">開始測驗</button>
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand">
+      <div class="logo">MM</div>
+      <div><strong>Money Mirror</strong><small>看見你的財富人生</small></div>
     </div>
+  </nav>
 
-    <div id="quiz" class="card hidden">
-      <h2 id="questionTitle"></h2>
-      <div id="options"></div>
-      <button onclick="nextQuestion()">下一題</button>
+  <main id="start" class="card hero">
+    <span class="pill">活動專屬｜3分鐘完成</span>
+    <h1>看見你的<br>財富DNA</h1>
+    <p class="lead">每個人的人生，都有一套看不見的金錢模式。它影響你的收入、投資、保險、房貸，甚至退休選擇。今天，讓我們一起看見它。</p>
+    <div class="grid">
+      <div class="benefit"><b>🧬 財富人格</b><span>了解你的金錢決策模式。</span></div>
+      <div class="benefit"><b>📊 健康指數</b><span>看見現金流與規劃成熟度。</span></div>
+      <div class="benefit"><b>🛡 風險覺察</b><span>檢視保單、負債與風險盲點。</span></div>
+      <div class="benefit"><b>🎁 免費會談</b><span>完成測驗可預約60分鐘財富導航會談。</span></div>
     </div>
+    <button onclick="startQuiz()">開始測驗 →</button>
+    <p class="note">本測驗用於財商覺察與活動引導，不構成投資、保險或稅務建議。</p>
+  </main>
 
-    <div id="leadForm" class="card hidden">
-      <h2>測驗完成</h2>
-      <p class="subtitle">留下資料後，即可查看你的財富DNA結果。</p>
-
-      <label>姓名</label>
-      <input type="text" id="name" placeholder="請輸入姓名">
-
-      <label>LINE ID</label>
-      <input type="text" id="line" placeholder="請輸入 LINE ID">
-
-      <label>電話</label>
-      <input type="tel" id="phone" placeholder="請輸入電話">
-
-      <button onclick="showResult()">查看結果</button>
+  <section id="quiz" class="card hidden">
+    <div class="quiz-head"><strong id="counter"></strong><span id="category"></span></div>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <h2 id="questionTitle"></h2>
+    <div id="options"></div>
+    <div class="actions">
+      <button class="secondary" onclick="prevQuestion()">← 上一題</button>
+      <button onclick="nextQuestion()">下一題 →</button>
     </div>
+  </section>
 
-    <div id="result" class="card hidden">
-      <span class="badge">你的財富DNA</span>
-      <h1 id="resultTitle"></h1>
-      <div class="result-box" id="resultContent"></div>
+  <section id="leadForm" class="card hidden">
+    <span class="pill">測驗完成｜查看結果前最後一步</span>
+    <h2>留下資料，取得你的專屬財富DNA分析</h2>
+    <label>姓名 *</label><input id="name" placeholder="請輸入姓名" />
+    <label>LINE ID *</label><input id="line" placeholder="請輸入 LINE ID" />
+    <label>電話</label><input id="phone" placeholder="選填" />
+    <label>目前最想改善的財務問題</label>
+    <select id="focus">
+      <option>財務沒有方向</option><option>存不到錢</option><option>不知道怎麼投資</option>
+      <option>保單不知道夠不夠</option><option>房貸/負債壓力</option><option>退休規劃</option><option>資產配置</option>
+    </select>
+    <label>希望一小時會談協助你看什麼？</label>
+    <textarea id="wish" placeholder="例如：現金流、保單、房貸、退休、投資方向..."></textarea>
+    <button onclick="showResult()">查看我的財富DNA</button>
+  </section>
 
-      <button onclick="bookConsult()">預約免費 60 分鐘財富導航會談</button>
+  <section id="result" class="card hidden">
+    <span class="pill">你的財富DNA結果</span>
+    <div id="resultTitle" class="result-name"></div>
+    <p id="resultSub"></p>
+    <div id="resultContent" class="result-box"></div>
+    <div class="score-card">
+      <div class="note">財商成熟度</div>
+      <div class="big-score"><span id="maturityScore">0</span><span>/100</span></div>
+      <div id="scoreBlock"></div>
     </div>
+    <button onclick="bookConsult()">加入 LINE｜預約免費60分鐘財富導航會談</button>
+    <button class="secondary" onclick="downloadReport()">下載我的財富報告</button>
+    <button class="secondary" onclick="restart()">重新測驗</button>
+    <p class="note">提醒：正式規劃仍需依你的收入、支出、資產、負債、保單與家庭狀況完整評估。</p>
+  </section>
 
-  </div>
+  <div class="footer">Money Mirror｜財富覺察體驗｜施茗凱 財務顧問</div>
+</div>
 
 <script>
+const LINE_URL = "https://line.me/R/ti/p/@你的LINE官方帳號";
+
 const questions = [
-  {
-    q: "1. 如果今天突然收到 100 萬元，你第一個想法是？",
-    options: [
-      { text: "A. 存起來，留著未來用", type: "A" },
-      { text: "B. 投資，讓它繼續增值", type: "B" },
-      { text: "C. 完成一直想做的夢想或旅行", type: "C" },
-      { text: "D. 先規劃，再決定怎麼分配", type: "D" }
-    ]
-  },
-  {
-    q: "2. 面對投資，你通常會？",
-    options: [
-      { text: "A. 覺得有風險，先不要碰", type: "A" },
-      { text: "B. 做足研究再投資", type: "B" },
-      { text: "C. 覺得有機會就試試看", type: "C" },
-      { text: "D. 找值得信任的人一起討論", type: "D" }
-    ]
-  },
-  {
-    q: "3. 月底如果還剩一筆錢，你通常會？",
-    options: [
-      { text: "A. 放進存款", type: "A" },
-      { text: "B. 投資", type: "B" },
-      { text: "C. 花掉犒賞自己", type: "C" },
-      { text: "D. 留一部分、投資一部分", type: "D" }
-    ]
-  },
-  {
-    q: "4. 你認為最大的財務風險是？",
-    options: [
-      { text: "A. 沒有存款", type: "A" },
-      { text: "B. 不懂投資", type: "B" },
-      { text: "C. 沒有享受人生", type: "C" },
-      { text: "D. 沒有做好規劃", type: "D" }
-    ]
-  },
-  {
-    q: "5. 如果收入增加一倍，你最可能？",
-    options: [
-      { text: "A. 存更多", type: "A" },
-      { text: "B. 投資更多", type: "B" },
-      { text: "C. 提升生活品質", type: "C" },
-      { text: "D. 開始規劃退休或財務自由", type: "D" }
-    ]
-  },
-  {
-    q: "6. 你多久會檢視自己的財務狀況？",
-    options: [
-      { text: "A. 很少", type: "C" },
-      { text: "B. 每月一次", type: "B" },
-      { text: "C. 有需要才看", type: "A" },
-      { text: "D. 固定追蹤並調整", type: "D" }
-    ]
-  },
-  {
-    q: "7. 如果突然失業半年，你最擔心的是？",
-    options: [
-      { text: "A. 沒有生活費", type: "A" },
-      { text: "B. 投資受到影響", type: "B" },
-      { text: "C. 生活品質下降", type: "C" },
-      { text: "D. 家庭與未來規劃被打亂", type: "D" }
-    ]
-  },
-  {
-    q: "8. 你認為保險最大的功能是？",
-    options: [
-      { text: "A. 有買就安心", type: "A" },
-      { text: "B. 轉嫁重大風險", type: "B" },
-      { text: "C. 別花太多錢就好", type: "C" },
-      { text: "D. 是整體財務規劃的一部分", type: "D" }
-    ]
-  },
-  {
-    q: "9. 你比較認同哪一句話？",
-    options: [
-      { text: "A. 有錢要存起來", type: "A" },
-      { text: "B. 錢要替我工作", type: "B" },
-      { text: "C. 人生就是要享受", type: "C" },
-      { text: "D. 財富是人生選擇的工具", type: "D" }
-    ]
-  },
-  {
-    q: "10. 看到朋友投資賺很多時，你會？",
-    options: [
-      { text: "A. 繼續照自己的步調", type: "A" },
-      { text: "B. 去研究他怎麼做到的", type: "B" },
-      { text: "C. 趕快跟進", type: "C" },
-      { text: "D. 評估是否符合自己的目標", type: "D" }
-    ]
-  },
-  {
-    q: "11. 你目前最想改善的是？",
-    options: [
-      { text: "A. 存不到錢", type: "A" },
-      { text: "B. 不知道怎麼投資", type: "B" },
-      { text: "C. 收入不夠高", type: "C" },
-      { text: "D. 財務沒有方向", type: "D" }
-    ]
-  },
-  {
-    q: "12. 如果只能選一個，你最想擁有？",
-    options: [
-      { text: "A. 一千萬存款", type: "A" },
-      { text: "B. 每月十萬元被動收入", type: "B" },
-      { text: "C. 可以自由旅行的生活", type: "C" },
-      { text: "D. 完全不用為錢做決定的人生", type: "D" }
-    ]
-  },
-  {
-    q: "13. 你認為真正的財富是？",
-    options: [
-      { text: "A. 銀行存款", type: "A" },
-      { text: "B. 能持續創造收入的資產", type: "B" },
-      { text: "C. 想買什麼就買什麼", type: "C" },
-      { text: "D. 有能力選擇自己的人生", type: "D" }
-    ]
-  },
-  {
-    q: "14. 對於貸款，你的看法是？",
-    options: [
-      { text: "A. 能不要借就不要借", type: "A" },
-      { text: "B. 合理運用可以放大資產", type: "B" },
-      { text: "C. 能讓生活更輕鬆就好", type: "C" },
-      { text: "D. 要看用途與整體財務規劃", type: "D" }
-    ]
-  },
-  {
-    q: "15. 你希望五年後的自己是？",
-    options: [
-      { text: "A. 有足夠存款", type: "A" },
-      { text: "B. 建立穩定投資收入", type: "B" },
-      { text: "C. 過著自己喜歡的生活", type: "C" },
-      { text: "D. 擁有完整的人生與財務藍圖", type: "D" }
-    ]
-  },
-  {
-    q: "16. 如果今天有一位專業人士願意免費陪你聊一小時，你最想討論的是？",
-    options: [
-      { text: "A. 如何存更多錢", type: "A" },
-      { text: "B. 如何讓錢增值", type: "B" },
-      { text: "C. 如何提升生活品質", type: "C" },
-      { text: "D. 如何打造適合自己的人生與財務規劃", type: "D" }
-    ]
-  }
+  {cat:"財富性格",q:"如果今天突然收到 100 萬元，你第一個想法是？",o:[["存起來，留著未來用","A"],["投資，讓它繼續增值","B"],["完成一直想做的夢想或旅行","C"],["先規劃，再決定怎麼分配","D"]]},
+  {cat:"財富性格",q:"面對投資，你通常會？",o:[["覺得有風險，先不要碰","A"],["做足研究再投資","B"],["覺得有機會就試試看","C"],["找值得信任的人一起討論","D"]]},
+  {cat:"現金流習慣",q:"月底如果還剩一筆錢，你通常會？",o:[["放進存款","A"],["投資","B"],["花掉犒賞自己","C"],["留一部分、投資一部分","D"]]},
+  {cat:"風險覺察",q:"你認為最大的財務風險是？",o:[["沒有存款","A"],["不懂投資","B"],["沒有享受人生","C"],["沒有做好規劃","D"]]},
+  {cat:"收入決策",q:"如果收入增加一倍，你最可能？",o:[["存更多","A"],["投資更多","B"],["提升生活品質","C"],["開始規劃退休或財務自由","D"]]},
+  {cat:"財務習慣",q:"你多久會檢視自己的財務狀況？",o:[["很少","C"],["每月一次","B"],["有需要才看","A"],["固定追蹤並調整","D"]]},
+  {cat:"風險覺察",q:"如果突然失業半年，你最擔心的是？",o:[["沒有生活費","A"],["投資受到影響","B"],["生活品質下降","C"],["家庭與未來規劃被打亂","D"]]},
+  {cat:"保障觀念",q:"你認為保險最大的功能是？",o:[["有買就安心","A"],["轉嫁重大風險","B"],["別花太多錢就好","C"],["是整體財務規劃的一部分","D"]]},
+  {cat:"財富信念",q:"你比較認同哪一句話？",o:[["有錢要存起來","A"],["錢要替我工作","B"],["人生就是要享受","C"],["財富是人生選擇的工具","D"]]},
+  {cat:"投資反應",q:"看到朋友投資賺很多時，你會？",o:[["繼續照自己的步調","A"],["去研究他怎麼做到的","B"],["趕快跟進","C"],["評估是否符合自己的目標","D"]]},
+  {cat:"改善目標",q:"你目前最想改善的是？",o:[["存不到錢","A"],["不知道怎麼投資","B"],["收入不夠高","C"],["財務沒有方向","D"]]},
+  {cat:"人生選擇",q:"如果只能選一個，你最想擁有？",o:[["一千萬存款","A"],["每月十萬元被動收入","B"],["可以自由旅行的生活","C"],["完全不用為錢做決定的人生","D"]]},
+  {cat:"財富定義",q:"你認為真正的財富是？",o:[["銀行存款","A"],["能持續創造收入的資產","B"],["想買什麼就買什麼","C"],["有能力選擇自己的人生","D"]]},
+  {cat:"負債觀念",q:"對於貸款，你的看法是？",o:[["能不要借就不要借","A"],["合理運用可以放大資產","B"],["能讓生活更輕鬆就好","C"],["要看用途與整體財務規劃","D"]]},
+  {cat:"五年願景",q:"你希望五年後的自己是？",o:[["有足夠存款","A"],["建立穩定投資收入","B"],["過著自己喜歡的生活","C"],["擁有完整的人生與財務藍圖","D"]]},
+  {cat:"會談需求",q:"如果今天有一位專業人士願意免費陪你聊一小時，你最想討論的是？",o:[["如何存更多錢","A"],["如何讓錢增值","B"],["如何提升生活品質","C"],["如何打造適合自己的人生與財務規劃","D"]]}
 ];
 
-const results = {
-  A: {
-    title: "安全守成型",
-    content: `
-      <strong>你的核心特質：</strong><br>
-      你重視安全感、穩定與風險控管。比起快速賺錢，你更在乎不要出錯。<br><br>
-      <strong>優勢：</strong><br>
-      不容易衝動投資，財務決策相對謹慎。<br><br>
-      <strong>盲點：</strong><br>
-      可能因為太保守，而錯過資產成長與現金流提升的機會。<br><br>
-      <strong>建議方向：</strong><br>
-      建立緊急預備金後，逐步學習資產配置與長期投資。
-    `
-  },
-  B: {
-    title: "成長投資型",
-    content: `
-      <strong>你的核心特質：</strong><br>
-      你相信錢要替自己工作，願意學習投資，也願意承擔合理風險。<br><br>
-      <strong>優勢：</strong><br>
-      有資產成長意識，容易累積投資經驗。<br><br>
-      <strong>盲點：</strong><br>
-      容易過度追求報酬，忽略風險管理與現金流安全。<br><br>
-      <strong>建議方向：</strong><br>
-      建立投資紀律，並檢查保障、負債與現金流是否平衡。
-    `
-  },
-  C: {
-    title: "生活體驗型",
-    content: `
-      <strong>你的核心特質：</strong><br>
-      你重視生活品質與當下感受，認為財富應該服務人生。<br><br>
-      <strong>優勢：</strong><br>
-      幸福感高，懂得享受成果，不會只為錢而活。<br><br>
-      <strong>盲點：</strong><br>
-      容易忽略儲蓄率、投資計畫與長期財務目標。<br><br>
-      <strong>建議方向：</strong><br>
-      保留生活品質，同時建立固定儲蓄與投資習慣。
-    `
-  },
-  D: {
-    title: "策略自由型",
-    content: `
-      <strong>你的核心特質：</strong><br>
-      你重視人生選擇權，傾向從整體人生藍圖來看待財務。<br><br>
-      <strong>優勢：</strong><br>
-      有目標感，也願意做長期規劃。<br><br>
-      <strong>盲點：</strong><br>
-      有時想得太完整，反而行動速度變慢。<br><br>
-      <strong>建議方向：</strong><br>
-      把大目標拆成小行動，定期檢視現金流、保障與資產配置。
-    `
-  }
+const resultMap = {
+  A:{t:"安全守成型",sub:"你的金錢核心是安全感。",c:"你重視穩定、預備金與風險控管。優勢是不容易衝動，也比較能守住財務底線。盲點是可能因為太保守，而錯過資產成長、現金流提升與長期配置的機會。"},
+  B:{t:"成長投資型",sub:"你的金錢核心是資產成長。",c:"你相信錢要替自己工作，願意學習投資，也願意承擔合理風險。優勢是有資產成長意識，容易累積投資經驗。盲點是可能過度追求報酬，忽略保單、負債、現金流與家庭責任。"},
+  C:{t:"生活體驗型",sub:"你的金錢核心是生活品質。",c:"你重視當下感受，認為財富應該服務人生。優勢是幸福感高，懂得享受成果。盲點是容易忽略儲蓄率、投資計畫、保障缺口與長期財務目標。"},
+  D:{t:"策略自由型",sub:"你的金錢核心是人生選擇權。",c:"你重視人生藍圖與長期規劃，傾向從整體角度看待財務。優勢是目標感強，也願意為未來做準備。盲點是可能想得太完整，反而行動速度變慢。"}
 };
 
-let currentQuestion = 0;
-let scores = { A: 0, B: 0, C: 0, D: 0 };
+let current=0, answers=Array(questions.length).fill(null), scores={A:0,B:0,C:0,D:0}, lastLead=null;
 
-function startQuiz() {
-  document.getElementById("start").classList.add("hidden");
-  document.getElementById("quiz").classList.remove("hidden");
-  renderQuestion();
+function show(id){["start","quiz","leadForm","result"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"});}
+function startQuiz(){show("quiz");render();}
+function render(){
+  const item=questions[current];
+  document.getElementById("counter").innerText=`第 ${current+1} 題 / 共 ${questions.length} 題`;
+  document.getElementById("category").innerText=item.cat;
+  document.getElementById("bar").style.width=`${(current/questions.length)*100}%`;
+  document.getElementById("questionTitle").innerText=item.q;
+  document.getElementById("options").innerHTML=item.o.map((x,i)=>`<label class="option"><input type="radio" name="ans" value="${x[1]}" ${answers[current]===x[1]?"checked":""}><div><strong>${String.fromCharCode(65+i)}</strong>${x[0]}</div></label>`).join("");
 }
-
-function renderQuestion() {
-  const q = questions[currentQuestion];
-  document.getElementById("questionTitle").innerText = q.q;
-
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-
-  q.options.forEach((option, index) => {
-    optionsDiv.innerHTML += `
-      <label class="option">
-        <input type="radio" name="answer" value="${option.type}">
-        ${option.text}
-      </label>
-    `;
-  });
+function nextQuestion(){const selected=document.querySelector('input[name="ans"]:checked');if(!selected){alert("請先選擇一個答案");return;}answers[current]=selected.value;current++;if(current<questions.length){render();}else{show("leadForm");}}
+function prevQuestion(){if(current>0){current--;render();}}
+function calc(){scores={A:0,B:0,C:0,D:0};answers.forEach(a=>{if(a)scores[a]++;});let top="A";Object.keys(scores).forEach(k=>{if(scores[k]>scores[top])top=k;});return top;}
+function maturity(){return Math.round((scores.A*72 + scores.B*82 + scores.C*70 + scores.D*88) / questions.length);}
+function showResult(){
+  const name=document.getElementById("name").value.trim(), line=document.getElementById("line").value.trim();
+  if(!name || !line){alert("請填寫姓名與 LINE ID");return;}
+  const top=calc(), res=resultMap[top], m=maturity();
+  document.getElementById("resultTitle").innerText=res.t;
+  document.getElementById("resultSub").innerText=res.sub;
+  document.getElementById("resultContent").innerText=res.c;
+  document.getElementById("maturityScore").innerText=m;
+  const total=questions.length;
+  document.getElementById("scoreBlock").innerHTML=Object.keys(scores).map(k=>`<div class="score-row"><div class="top"><span>${resultMap[k].t}</span><b>${scores[k]}</b></div><div class="mini"><span style="width:${scores[k]/total*100}%"></span></div></div>`).join("");
+  lastLead={name,line,phone:document.getElementById("phone").value.trim(),focus:document.getElementById("focus").value,wish:document.getElementById("wish").value.trim(),result:res.t,maturity:m,scores:{...scores},time:new Date().toLocaleString()};
+  localStorage.setItem("moneyMirrorLead", JSON.stringify(lastLead));
+  show("result");
 }
-
-function nextQuestion() {
-  const selected = document.querySelector('input[name="answer"]:checked');
-
-  if (!selected) {
-    alert("請先選擇一個答案");
-    return;
-  }
-
-  scores[selected.value]++;
-
-  currentQuestion++;
-
-  if (currentQuestion < questions.length) {
-    renderQuestion();
-  } else {
-    document.getElementById("quiz").classList.add("hidden");
-    document.getElementById("leadForm").classList.remove("hidden");
-  }
+function bookConsult(){if(LINE_URL.includes("你的LINE官方帳號")){alert("請把程式碼中的 LINE_URL 改成你的 LINE 官方帳號連結。");return;}window.open(LINE_URL,"_blank");}
+function downloadReport(){
+  const lead=lastLead || JSON.parse(localStorage.getItem("moneyMirrorLead") || "{}");
+  const text=`Money Mirror｜財富DNA分析報告\n\n姓名：${lead.name||""}\n財富DNA：${lead.result||""}\n財商成熟度：${lead.maturity||""}/100\n目前最想改善：${lead.focus||""}\n希望會談協助：${lead.wish||""}\n\n建議預約 60 分鐘「財富導航會談」，完整整理收入、支出、資產、負債、保單、房貸與退休目標。`;
+  const blob=new Blob([text],{type:"text/plain;charset=utf-8"}), url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url;a.download="Money-Mirror-財富DNA報告.txt";a.click();URL.revokeObjectURL(url);
 }
-
-function showResult() {
-  const name = document.getElementById("name").value.trim();
-
-  if (!name) {
-    alert("請先填寫姓名");
-    return;
-  }
-
-  let topType = "A";
-  let maxScore = scores.A;
-
-  for (let type in scores) {
-    if (scores[type] > maxScore) {
-      maxScore = scores[type];
-      topType = type;
-    }
-  }
-
-  document.getElementById("leadForm").classList.add("hidden");
-  document.getElementById("result").classList.remove("hidden");
-
-  document.getElementById("resultTitle").innerText = results[topType].title;
-  document.getElementById("resultContent").innerHTML = results[topType].content;
-
-  console.log({
-    name: document.getElementById("name").value,
-    line: document.getElementById("line").value,
-    phone: document.getElementById("phone").value,
-    scores: scores,
-    result: results[topType].title
-  });
-}
-
-function bookConsult() {
-  alert("請加入官方 LINE 或由工作人員協助安排 60 分鐘財富導航會談。");
-}
+function restart(){current=0;answers=Array(questions.length).fill(null);scores={A:0,B:0,C:0,D:0};lastLead=null;show("start");}
 </script>
-
 </body>
 </html>
