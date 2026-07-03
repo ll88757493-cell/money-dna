@@ -1,87 +1,102 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Money Mirror｜財富DNA測驗</title>
-  <meta name="description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點。">
-  <meta property="og:title" content="Money Mirror｜財富DNA測驗">
-  <meta property="og:description" content="3分鐘看見你的金錢模式、財務優勢與財務盲點。">
-  <meta property="og:type" content="website">
-  <link rel="stylesheet" href="./css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Mirror｜財富DNA測驗 V4</title>
+<meta name="description" content="3分鐘看見你的財富DNA、財富雷達圖、成熟度與優先改善方向。">
+<style>
+:root{
+  --bg:#060914;--bg2:#101a2c;--card:rgba(255,255,255,.075);--line:rgba(255,255,255,.14);
+  --text:#f8fafc;--muted:#aab6ca;--gold:#d8b46a;--gold2:#ffe7a3;--blue:#79d7ff;
+  --green:#8ff0b1;--red:#ffaaa5;--shadow:0 28px 90px rgba(0,0,0,.42)
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+  background:radial-gradient(circle at 10% 8%,rgba(216,180,106,.34),transparent 28%),
+             radial-gradient(circle at 86% 10%,rgba(121,215,255,.21),transparent 30%),
+             linear-gradient(180deg,var(--bg),var(--bg2));
+}
+.wrap{width:min(1060px,100%);margin:auto;padding:22px 16px 54px}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#fff0b7);color:#111827;font-weight:1000;box-shadow:0 14px 36px rgba(216,180,106,.28)}
+.brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.052));border:1px solid var(--line);border-radius:34px;padding:34px;box-shadow:var(--shadow);backdrop-filter:blur(16px);animation:fade .28s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero{padding:54px 38px 40px;overflow:hidden}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(216,180,106,.12);border:1px solid rgba(216,180,106,.35);color:var(--gold2);font-size:14px;font-weight:850}
+h1{font-size:clamp(38px,6.6vw,78px);line-height:1.03;letter-spacing:-2.8px;margin:18px 0 16px}
+h2{font-size:clamp(24px,4vw,38px);line-height:1.24;letter-spacing:-1px;margin:0 0 18px}
+h3{font-size:22px;margin:0 0 12px}
+p{color:var(--muted);line-height:1.85;font-size:16px}
+.lead{font-size:19px;color:#dce8f8;max-width:760px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+.feature,.panel,.insight{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:24px;padding:17px}
+.feature{min-height:120px}.feature b,.insight b{display:block;color:#fff;margin-bottom:8px}.feature span{font-size:13px;color:var(--muted);line-height:1.55}
+button{width:100%;border:0;border-radius:21px;padding:17px 20px;font-size:17px;font-weight:950;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;color:#111827;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 18px 48px rgba(216,180,106,.25);transition:.16s;margin-top:14px}
+button:hover{transform:translateY(-2px)}.secondary{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.hidden{display:none!important}.quiz-head{display:flex;justify-content:space-between;gap:14px;color:var(--muted);margin-bottom:18px}
+.progress{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin:8px 0 28px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--blue));transition:.28s}
+.option{display:flex;gap:12px;padding:16px 17px;margin:12px 0;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.055);cursor:pointer;color:#edf4ff;transition:.16s}
+.option:hover{background:rgba(255,255,255,.09);border-color:rgba(255,231,163,.55)}.option input{margin-top:3px;accent-color:var(--gold);transform:scale(1.12)}.option strong{color:var(--gold2);margin-right:6px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-weight:850;margin:14px 0 7px;color:#edf4ff}
+input,select,textarea{width:100%;padding:16px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--text);font-size:16px;outline:none}select option{color:#111827}textarea{min-height:96px;resize:vertical}.note{font-size:13px;color:var(--muted)}
+.analysis,.radar-area{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}.result-name{font-size:clamp(34px,5.2vw,60px);line-height:1.04;margin:10px 0;color:var(--gold2);letter-spacing:-1.8px}
+.result-box{border-left:5px solid var(--gold);background:rgba(255,255,255,.055);border-radius:22px;padding:20px;color:#eaf1fb;line-height:1.9}
+.big-score{font-size:64px;font-weight:1000;line-height:1;margin:8px 0 14px}.big-score span{font-size:18px;color:var(--muted)}
+.score-row{margin:14px 0}.score-row .top{display:flex;justify-content:space-between;font-size:14px;color:#dce7f5;margin-bottom:7px}.mini{height:10px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}.mini span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.radar-area{margin-top:18px}.chart-wrap{position:relative;width:100%;height:380px}canvas{width:100%;height:100%}
+.priority{margin:0;padding-left:22px;color:#e8f1ff;line-height:1.8}.priority li{margin-bottom:12px}
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}ul{margin:8px 0 0;padding-left:22px;color:#dce7f5;line-height:1.75}
+.gift{margin-top:18px;border:1px solid rgba(216,180,106,.28);background:rgba(216,180,106,.08);border-radius:26px;padding:20px}
+.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
+@media(max-width:820px){.grid4,.analysis,.insights,.radar-area{grid-template-columns:1fr}.card{padding:23px;border-radius:27px}.hero{padding:32px 23px}.actions{grid-template-columns:1fr}.chart-wrap{height:320px}}
+</style>
 </head>
 <body>
-<div class="bg-noise"></div>
-
 <div class="wrap">
   <nav class="nav">
-    <div class="brand">
-      <div class="logo">MM</div>
-      <div>
-        <strong>Money Mirror</strong>
-        <small>財富覺察系統</small>
-      </div>
-    </div>
+    <div class="brand"><div class="logo">MM</div><div><strong>Money Mirror</strong><small>財富覺察系統</small></div></div>
     <span class="note">財務教練</span>
   </nav>
 
   <main id="start" class="card hero">
-    <span class="pill">Money Mirror 3.5 Beta｜活動專屬</span>
+    <span class="pill">Money Mirror V4｜正式版</span>
     <h1>看見你的<br>財富人生</h1>
-    <p class="lead">
-      真正限制財富的，從來不只是收入，而是我們每天重複做出的財務決策。
-      透過 3 分鐘測驗，看見你的金錢模式、財務優勢、財務盲點與財富雷達圖。
-    </p>
-
+    <p class="lead">真正限制財富的，從來不只是收入，而是我們每天重複做出的財務決策。透過 3 分鐘測驗，看見你的財富DNA、財富雷達圖、成熟度與優先改善方向。</p>
     <div class="grid4">
-      <div class="feature"><b>🧬 財富DNA</b><span>看見你面對金錢、風險與選擇時的慣性。</span></div>
-      <div class="feature"><b>📊 財富雷達圖</b><span>現金流、財富成長、風險管理、財務規劃、財商思維。</span></div>
-      <div class="feature"><b>🔎 財務盲點</b><span>整理最容易忽略的財務決策區域。</span></div>
-      <div class="feature"><b>🎁 財務教練體驗</b><span>完成後可銜接 60 分鐘財富導航會談。</span></div>
+      <div class="feature"><b>🧬 財富DNA</b><span>不只分人格，也看見你真正的財務決策慣性。</span></div>
+      <div class="feature"><b>📊 動態雷達圖</b><span>每題都會影響五大財務能力分數。</span></div>
+      <div class="feature"><b>🧠 智能分析</b><span>依最低分自動排序改善順序。</span></div>
+      <div class="feature"><b>🎁 財務教練體驗</b><span>自然銜接 60 分鐘一對一會談。</span></div>
     </div>
-
     <button onclick="startQuiz()">開始測驗 →</button>
     <p class="note">本測驗為財商覺察工具，不構成投資、保險、貸款或稅務建議。</p>
   </main>
 
   <section id="quiz" class="card hidden">
-    <div class="quiz-head">
-      <strong id="counter"></strong>
-      <span id="category"></span>
-    </div>
+    <div class="quiz-head"><strong id="counter"></strong><span id="category"></span></div>
     <div class="progress"><div id="bar" class="bar"></div></div>
     <h2 id="questionTitle"></h2>
     <div id="options"></div>
-    <div class="actions">
-      <button class="secondary" onclick="prevQuestion()">← 上一題</button>
-      <button onclick="nextQuestion()">下一題 →</button>
-    </div>
+    <div class="actions"><button class="secondary" onclick="prevQuestion()">← 上一題</button><button onclick="nextQuestion()">下一題 →</button></div>
   </section>
 
   <section id="leadForm" class="card hidden">
     <span class="pill">測驗完成｜查看結果前最後一步</span>
     <h2>留下姓名，取得你的專屬財富DNA分析</h2>
     <p>以下資料只作為活動現場辨識與後續財務覺察引導使用。</p>
-
-    <label>姓名 *</label>
-    <input id="name" placeholder="請輸入姓名">
-
+    <label>姓名 *</label><input id="name" placeholder="請輸入姓名">
     <label>目前最想改善的財務問題</label>
     <select id="focus">
-      <option>財務沒有方向</option>
-      <option>存不到錢</option>
-      <option>不知道怎麼投資</option>
-      <option>保單不知道夠不夠</option>
-      <option>房貸／負債壓力</option>
-      <option>退休規劃</option>
-      <option>資產配置</option>
-      <option>家庭資產傳承</option>
+      <option>財務沒有方向</option><option>存不到錢</option><option>不知道怎麼投資</option><option>保單不知道夠不夠</option><option>房貸／負債壓力</option><option>退休規劃</option><option>資產配置</option><option>家庭資產傳承</option>
     </select>
-
     <label>希望一小時會談協助你看什麼？</label>
     <textarea id="wish" placeholder="例如：現金流、保單、房貸、退休、投資方向..."></textarea>
-
     <button onclick="showResult()">查看我的財富DNA</button>
   </section>
 
@@ -93,57 +108,161 @@
         <p id="resultSub"></p>
         <div id="resultContent" class="result-box"></div>
       </div>
-
       <div class="panel">
         <div class="note">財商成熟度</div>
         <div class="big-score"><span id="maturityScore">0</span><span>/100</span></div>
         <div id="scoreBlock"></div>
       </div>
     </div>
-
     <div class="radar-area">
-      <div class="panel radar-panel">
-        <div class="section-title">
-          <span class="pill">財富雷達圖</span>
-          <h2>你的財務輪廓</h2>
-          <p>這張圖不是判斷好壞，而是幫助你看見：目前哪裡穩、哪裡有成長空間。</p>
-        </div>
-        <div class="chart-wrap">
-          <canvas id="radarChart"></canvas>
-        </div>
-      </div>
-
       <div class="panel">
-        <div class="section-title">
-          <span class="pill">AI 覺察建議</span>
-          <h2>優先改善順序</h2>
-        </div>
+        <span class="pill">財富雷達圖</span>
+        <h2 style="margin-top:12px">你的財務輪廓</h2>
+        <p>這張圖不是判斷好壞，而是幫助你看見目前哪裡穩、哪裡有成長空間。</p>
+        <div class="chart-wrap"><canvas id="radarCanvas"></canvas></div>
+      </div>
+      <div class="panel">
+        <span class="pill">AI 覺察建議</span>
+        <h2 style="margin-top:12px">優先改善順序</h2>
         <ol id="priorityList" class="priority"></ol>
       </div>
     </div>
-
     <div class="insights">
       <div class="insight"><b>你的優勢</b><ul id="strengthList"></ul></div>
       <div class="insight"><b>容易忽略</b><ul id="blindList"></ul></div>
       <div class="insight"><b>建議下一步</b><ul id="nextList"></ul></div>
     </div>
-
     <div class="gift">
       <h3>🎁 專屬活動禮：60分鐘財務教練體驗</h3>
       <p>若你想更深入了解自己的結果，可預約一對一會談。內容可包含：財富DNA解析、財務健康檢查、保單健診、房貸健診、退休方向與財務藍圖建議。</p>
       <button onclick="bookConsult()">我要預約／加入 LINE</button>
       <button class="secondary" onclick="downloadReport()">下載我的財富報告</button>
     </div>
-
     <button class="secondary" onclick="restart()">重新測驗</button>
   </section>
-
   <div class="footer">Money Mirror｜看見你的財富人生</div>
 </div>
 
-<script src="./js/questions.js"></script>
-<script src="./js/results.js"></script>
-<script src="./js/radar.js"></script>
-<script src="./js/app.js"></script>
+<script>
+const LINE_URL = "https://line.me/R/ti/p/@你的LINE官方帳號";
+
+const axes = ["cash","growth","risk","plan","mind"];
+const axisLabels = {cash:"現金流管理",growth:"財富成長",risk:"風險管理",plan:"財務規劃",mind:"財商思維"};
+const priorityText = {
+  cash:"先整理每月收入、支出與可投資現金流，讓財務改善有明確起點。",
+  growth:"建立長期資產配置觀念，不只追求報酬，也要重視紀律與分散。",
+  risk:"盤點保單、負債與家庭責任，避免一個事件打亂整體財務節奏。",
+  plan:"把想要的生活具體化，建立 1 年、3 年、5 年的財務行動藍圖。",
+  mind:"釐清自己對金錢的信念，讓財務決策不再只靠情緒或慣性。"
+};
+
+const questions = [
+ {cat:"財富性格",q:"如果今天突然收到 100 萬元，你第一個想法是？",o:[
+  ["存起來，留著未來用","A",{cash:10,risk:8,growth:-7,plan:2,mind:1},72],
+  ["投資，讓它繼續增值","B",{growth:12,mind:5,risk:-4,cash:0,plan:2},80],
+  ["完成一直想做的夢想或旅行","C",{mind:5,cash:-10,plan:-6,risk:-3,growth:1},62],
+  ["先規劃，再決定怎麼分配","D",{plan:12,mind:7,risk:5,cash:5,growth:3},88]]},
+ {cat:"投資觀念",q:"朋友介紹一個年報酬很高的投資，你會？",o:[
+  ["先拒絕，不想冒險","A",{risk:8,growth:-8,mind:-2,plan:0,cash:2},68],
+  ["研究資料後再判斷","B",{growth:7,mind:8,risk:4,plan:4,cash:0},84],
+  ["先小額試試看","C",{growth:5,risk:-7,mind:0,plan:-2,cash:-2},66],
+  ["找專業人士一起討論","D",{risk:8,plan:8,mind:6,growth:4,cash:0},88]]},
+ {cat:"現金流習慣",q:"月底如果還剩一筆錢，你通常會？",o:[
+  ["放進存款","A",{cash:10,risk:5,growth:-4,plan:1,mind:0},74],
+  ["拿去投資","B",{growth:9,cash:2,risk:-2,plan:2,mind:2},78],
+  ["花掉犒賞自己","C",{cash:-14,plan:-8,risk:-4,mind:2,growth:0},55],
+  ["留一部分、投資一部分","D",{cash:10,growth:7,plan:7,risk:4,mind:4},88]]},
+ {cat:"風險覺察",q:"你認為最大的財務風險是？",o:[
+  ["沒有存款","A",{cash:8,risk:6,plan:1,growth:-2,mind:0},72],
+  ["不懂投資","B",{growth:7,mind:5,risk:0,plan:1,cash:-1},76],
+  ["沒有享受人生","C",{mind:5,cash:-6,plan:-4,risk:-3,growth:0},58],
+  ["沒有做好規劃","D",{plan:10,risk:8,mind:5,cash:2,growth:2},86]]},
+ {cat:"收入決策",q:"如果收入增加一倍，你最可能？",o:[
+  ["存更多","A",{cash:9,risk:4,growth:-3,plan:1,mind:0},72],
+  ["投資更多","B",{growth:10,mind:4,risk:-2,plan:2,cash:1},80],
+  ["提升生活品質","C",{mind:4,cash:-8,plan:-5,risk:-2,growth:0},60],
+  ["開始規劃退休或財務自由","D",{plan:12,growth:6,mind:6,risk:4,cash:3},90]]},
+ {cat:"財務習慣",q:"你多久會檢視自己的財務狀況？",o:[
+  ["很少","C",{plan:-12,cash:-8,mind:-6,risk:-5,growth:-2},52],
+  ["每月一次","B",{plan:7,cash:5,mind:4,risk:2,growth:1},78],
+  ["有需要才看","A",{plan:-6,cash:-4,mind:-2,risk:-2,growth:0},62],
+  ["固定追蹤並調整","D",{plan:14,cash:8,mind:7,risk:5,growth:3},92]]},
+ {cat:"失業情境",q:"如果突然失業半年，你最擔心的是？",o:[
+  ["沒有生活費","A",{cash:8,risk:8,plan:1,growth:-2,mind:0},72],
+  ["投資受到影響","B",{growth:5,cash:1,risk:-1,plan:2,mind:2},74],
+  ["生活品質下降","C",{cash:-7,plan:-4,risk:-3,mind:3,growth:0},58],
+  ["家庭與未來規劃被打亂","D",{risk:8,plan:8,cash:4,mind:5,growth:1},86]]},
+ {cat:"保障觀念",q:"你認為保險最大的功能是？",o:[
+  ["有買就安心","A",{risk:1,plan:-2,mind:-2,cash:0,growth:0},64],
+  ["轉嫁重大風險","B",{risk:11,plan:3,mind:3,cash:0,growth:0},82],
+  ["別花太多錢就好","C",{risk:-12,plan:-4,cash:2,mind:-3,growth:0},55],
+  ["是整體財務規劃的一部分","D",{risk:13,plan:8,mind:5,cash:1,growth:1},90]]},
+ {cat:"財富信念",q:"你比較認同哪一句話？",o:[
+  ["有錢要存起來","A",{cash:7,risk:5,growth:-4,plan:0,mind:0},70],
+  ["錢要替我工作","B",{growth:10,mind:5,risk:-1,plan:2,cash:0},80],
+  ["人生就是要享受","C",{mind:5,cash:-8,plan:-5,risk:-3,growth:0},58],
+  ["財富是人生選擇的工具","D",{mind:9,plan:8,growth:4,risk:3,cash:2},90]]},
+ {cat:"投資反應",q:"看到朋友投資賺很多時，你會？",o:[
+  ["繼續照自己的步調","A",{risk:5,growth:-3,mind:3,plan:1,cash:0},72],
+  ["去研究他怎麼做到的","B",{growth:8,mind:7,plan:2,risk:1,cash:0},82],
+  ["趕快跟進","C",{growth:7,risk:-14,mind:-6,plan:-6,cash:-4},54],
+  ["評估是否符合自己的目標","D",{growth:5,risk:8,plan:7,mind:6,cash:0},88]]},
+ {cat:"改善目標",q:"你目前最想改善的是？",o:[
+  ["存不到錢","A",{cash:-8,plan:0,risk:0,growth:0,mind:0},60],
+  ["不知道怎麼投資","B",{growth:-7,mind:0,risk:0,plan:0,cash:0},62],
+  ["收入不夠高","C",{growth:1,cash:-4,plan:-3,mind:0,risk:0},58],
+  ["財務沒有方向","D",{plan:-8,mind:-2,cash:0,growth:0,risk:0},60]]},
+ {cat:"人生選擇",q:"如果只能選一個，你最想擁有？",o:[
+  ["一千萬存款","A",{cash:8,risk:4,growth:-3,plan:1,mind:0},72],
+  ["每月十萬元被動收入","B",{growth:8,cash:5,plan:3,mind:3,risk:0},82],
+  ["可以自由旅行的生活","C",{mind:5,cash:-5,plan:-4,risk:-2,growth:0},62],
+  ["完全不用為錢做決定的人生","D",{plan:8,mind:8,growth:5,risk:2,cash:2},88]]},
+ {cat:"財富定義",q:"你認為真正的財富是？",o:[
+  ["銀行存款","A",{cash:7,risk:3,growth:-3,plan:0,mind:0},70],
+  ["能持續創造收入的資產","B",{growth:10,mind:5,cash:3,plan:3,risk:0},84],
+  ["想買什麼就買什麼","C",{cash:-8,plan:-5,risk:-4,mind:0,growth:1},56],
+  ["有能力選擇自己的人生","D",{mind:10,plan:8,growth:4,risk:3,cash:2},90]]},
+ {cat:"負債觀念",q:"對於貸款，你的看法是？",o:[
+  ["能不要借就不要借","A",{risk:5,growth:-5,plan:1,cash:0,mind:0},70],
+  ["合理運用可以放大資產","B",{growth:8,risk:-2,plan:4,mind:4,cash:0},78],
+  ["能讓生活更輕鬆就好","C",{cash:-8,risk:-8,plan:-5,mind:-2,growth:0},54],
+  ["要看用途與整體財務規劃","D",{plan:11,risk:8,mind:6,growth:3,cash:2},90]]},
+ {cat:"五年願景",q:"你希望五年後的自己是？",o:[
+  ["有足夠存款","A",{cash:7,risk:4,growth:-2,plan:2,mind:0},72],
+  ["建立穩定投資收入","B",{growth:9,cash:3,plan:5,mind:4,risk:0},84],
+  ["過著自己喜歡的生活","C",{mind:5,cash:-4,plan:-8,risk:-2,growth:0},62],
+  ["擁有完整的人生與財務藍圖","D",{plan:13,mind:7,risk:4,growth:4,cash:3},92]]},
+ {cat:"會談需求",q:"如果今天有一位專業人士願意免費陪你聊一小時，你最想討論的是？",o:[
+  ["如何存更多錢","A",{cash:5,plan:1,risk:0,growth:0,mind:0},70],
+  ["如何讓錢增值","B",{growth:5,mind:2,plan:1,risk:0,cash:0},74],
+  ["如何提升生活品質","C",{mind:3,cash:-2,plan:-1,risk:0,growth:0},64],
+  ["如何打造適合自己的人生與財務規劃","D",{plan:8,mind:6,risk:3,cash:2,growth:2},88]]}
+];
+
+const resultMap={
+ A:{t:"穩健守護者",sub:"你的金錢核心是安全感。",c:"你重視穩定、預備金與風險控管。你不容易衝動，也比較能守住財務底線。需要注意的是，若長期只追求安全，可能錯過資產成長與現金流提升的機會。",s:["重視穩定","風險意識高","不容易衝動消費或投資"],b:["可能過度保守","資產成長速度偏慢","容易把存款或保單當成全部規劃"],n:["建立緊急預備金後開始做資產配置","檢查保障是否符合家庭責任","設定中長期財務目標"]},
+ B:{t:"成長建築師",sub:"你的金錢核心是資產成長。",c:"你相信錢要替自己工作，願意學習投資，也願意承擔合理風險。你的資產成長意識強，但要避免過度追求報酬，而忽略現金流、防護網與負債控管。",s:["願意學習","有資產成長意識","能接受合理風險"],b:["可能忽略保障缺口","容易追求高報酬","投資前未必先看整體現金流"],n:["建立投資紀律","同步檢視保單與負債","把報酬目標改成長期可持續策略"]},
+ C:{t:"自由探索者",sub:"你的金錢核心是生活品質。",c:"你認為財富應該服務人生，懂得享受成果，也重視當下感受。你的幸福感通常不低，但要留意儲蓄率、退休準備與風險規劃，不要讓未來的自己承擔壓力。",s:["懂得享受人生","重視生活品質","不容易只為錢而活"],b:["儲蓄率可能不足","長期目標容易延後","容易低估退休與醫療風險"],n:["建立固定儲蓄比例","把享受預算制度化","檢查保障與退休準備是否足夠"]},
+ D:{t:"策略領航者",sub:"你的金錢核心是人生選擇權。",c:"你重視人生藍圖與長期規劃，傾向從整體角度看待財務。你的目標感強，也願意為未來做準備。需要注意的是，若想得太完整，可能會延遲真正行動。",s:["目標感明確","擅長長期規劃","重視人生選擇權"],b:["可能想太多而行動慢","容易忽略短期現金流","規劃很多但缺少定期追蹤"],n:["把大目標拆成年度行動","定期檢視現金流、保單、房貸與投資","建立個人財務藍圖"]}
+};
+
+let current=0, answers=Array(questions.length).fill(null), scores={A:0,B:0,C:0,D:0}, axisScores={cash:50,growth:50,risk:50,plan:50,mind:50}, lastLead=null;
+
+function show(id){["start","quiz","leadForm","result"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
+function startQuiz(){show("quiz");render()}
+function render(){const item=questions[current];document.getElementById("counter").innerText=`第 ${current+1} 題 / 共 ${questions.length} 題`;document.getElementById("category").innerText=item.cat;document.getElementById("bar").style.width=`${(current/questions.length)*100}%`;document.getElementById("questionTitle").innerText=item.q;document.getElementById("options").innerHTML=item.o.map((x,i)=>`<label class="option"><input type="radio" name="ans" value="${x[1]}" ${answers[current]===x[1]?"checked":""}><div><strong>${String.fromCharCode(65+i)}</strong>${x[0]}</div></label>`).join("")}
+function nextQuestion(){const selected=document.querySelector('input[name="ans"]:checked');if(!selected){alert("請先選擇一個答案");return}answers[current]=selected.value;current++;if(current<questions.length){render()}else{show("leadForm")}}
+function prevQuestion(){if(current>0){current--;render()}}
+function calc(){scores={A:0,B:0,C:0,D:0};answers.forEach(a=>{if(a)scores[a]++});let top="A";Object.keys(scores).forEach(k=>{if(scores[k]>scores[top])top=k});return top}
+function calcAxes(){const raw={cash:50,growth:50,risk:50,plan:50,mind:50};answers.forEach((ans,i)=>{if(!ans)return;const option=questions[i].o.find(x=>x[1]===ans);const delta=option[2];axes.forEach(ax=>raw[ax]+=delta[ax]||0)});axes.forEach(ax=>raw[ax]=Math.max(25,Math.min(98,Math.round(raw[ax]))));return raw}
+function calcMaturity(){let total=0,count=0;answers.forEach((ans,i)=>{if(!ans)return;const option=questions[i].o.find(x=>x[1]===ans);total+=option[3];count++});let base=count?total/count:65;const avg=axes.reduce((s,a)=>s+axisScores[a],0)/axes.length;return Math.max(45,Math.min(96,Math.round(base*.68+avg*.32)))}
+function listHTML(arr){return arr.map(x=>`<li>${x}</li>`).join("")}
+function buildPriorities(){return Object.entries(axisScores).sort((a,b)=>a[1]-b[1]).slice(0,3).map(([axis,score],i)=>{const tag=score<55?"優先處理":score<70?"建議強化":"可再優化";return `<li><strong>${i+1}. ${axisLabels[axis]}｜${score}/100｜${tag}</strong><br>${priorityText[axis]}</li>`}).join("")}
+function showResult(){const name=document.getElementById("name").value.trim();if(!name){alert("請填寫姓名");return}const top=calc(),res=resultMap[top];axisScores=calcAxes();const m=calcMaturity();document.getElementById("resultTitle").innerText=res.t;document.getElementById("resultSub").innerText=res.sub;document.getElementById("resultContent").innerText=res.c;document.getElementById("maturityScore").innerText=m;document.getElementById("strengthList").innerHTML=listHTML(res.s);document.getElementById("blindList").innerHTML=listHTML(res.b);document.getElementById("nextList").innerHTML=listHTML(res.n);document.getElementById("priorityList").innerHTML=buildPriorities();const total=questions.length;document.getElementById("scoreBlock").innerHTML=Object.keys(scores).map(k=>`<div class="score-row"><div class="top"><span>${resultMap[k].t}</span><b>${scores[k]}</b></div><div class="mini"><span style="width:${scores[k]/total*100}%"></span></div></div>`).join("");lastLead={name,focus:document.getElementById("focus").value,wish:document.getElementById("wish").value.trim(),result:res.t,maturity:m,scores:{...scores},radar:{...axisScores},time:new Date().toLocaleString()};localStorage.setItem("moneyMirrorLead",JSON.stringify(lastLead));show("result");setTimeout(drawRadar,80)}
+function drawRadar(){const c=document.getElementById("radarCanvas"),ctx=c.getContext("2d"),dpr=window.devicePixelRatio||1;const rect=c.getBoundingClientRect();c.width=rect.width*dpr;c.height=rect.height*dpr;ctx.scale(dpr,dpr);const w=rect.width,h=rect.height,cx=w/2,cy=h/2+10,r=Math.min(w,h)*.34;ctx.clearRect(0,0,w,h);const labels=["現金流管理","財富成長","風險管理","財務規劃","財商思維"],vals=[axisScores.cash,axisScores.growth,axisScores.risk,axisScores.plan,axisScores.mind];function pt(i,rad){const a=-Math.PI/2+i*2*Math.PI/5;return [cx+Math.cos(a)*rad,cy+Math.sin(a)*rad]}ctx.strokeStyle="rgba(255,255,255,.16)";ctx.fillStyle="rgba(248,250,252,.82)";ctx.font="700 13px Noto Sans TC, Arial";for(let ring=1;ring<=5;ring++){ctx.beginPath();for(let i=0;i<5;i++){const [x,y]=pt(i,r*ring/5);i?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();ctx.stroke()}for(let i=0;i<5;i++){const [x,y]=pt(i,r);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();const [lx,ly]=pt(i,r+42);ctx.textAlign=lx<cx-10?"right":lx>cx+10?"left":"center";ctx.fillText(labels[i],lx,ly)}ctx.beginPath();vals.forEach((v,i)=>{const [x,y]=pt(i,r*v/100);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.closePath();ctx.fillStyle="rgba(216,180,106,.26)";ctx.fill();ctx.strokeStyle="rgba(255,231,163,.98)";ctx.lineWidth=3;ctx.stroke();vals.forEach((v,i)=>{const [x,y]=pt(i,r*v/100);ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle="rgba(121,215,255,1)";ctx.fill();ctx.fillStyle="#fff";ctx.font="700 12px Arial";ctx.textAlign="center";ctx.fillText(v,x,y-10)})}
+function bookConsult(){if(LINE_URL.includes("你的LINE官方帳號")){alert("請把程式碼中的 LINE_URL 改成你的 LINE 官方帳號連結。");return}window.open(LINE_URL,"_blank")}
+function downloadReport(){const lead=lastLead||JSON.parse(localStorage.getItem("moneyMirrorLead")||"{}"),radar=lead.radar||{};const text=`Money Mirror｜財富DNA分析報告\n\n姓名：${lead.name||""}\n財富DNA：${lead.result||""}\n財商成熟度：${lead.maturity||""}/100\n目前最想改善：${lead.focus||""}\n希望會談協助：${lead.wish||""}\n\n財富雷達圖：\n現金流管理：${radar.cash||""}/100\n財富成長：${radar.growth||""}/100\n風險管理：${radar.risk||""}/100\n財務規劃：${radar.plan||""}/100\n財商思維：${radar.mind||""}/100\n`;const blob=new Blob([text],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Money-Mirror-財富DNA報告.txt";a.click();URL.revokeObjectURL(url)}
+function restart(){current=0;answers=Array(questions.length).fill(null);scores={A:0,B:0,C:0,D:0};axisScores={cash:50,growth:50,risk:50,plan:50,mind:50};lastLead=null;show("start")}
+</script>
 </body>
 </html>
